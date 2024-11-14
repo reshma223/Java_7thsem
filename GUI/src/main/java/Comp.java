@@ -2,15 +2,19 @@
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.management.relation.Role;
 import javax.swing.*;
 
 
 public class Comp extends JFrame implements ActionListener{
     Container c;
-    JLabel l1;
+    JLabel l1,l2;
     JRadioButton r1,r2;
     JComboBox cb;
-    JTextArea ta;
+    JTextArea ta,t1;
     Comp()
     {
         setTitle("example Components");
@@ -19,9 +23,15 @@ public class Comp extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         c=this.getContentPane();
         c.setLayout(null);
-        l1=new JLabel("Gender");
-        l1.setBounds(20,100,80,30);
+        l1=new JLabel("Name");
+        l1.setBounds(20,50,80,30);
         c.add(l1);
+        t1=new JTextArea();
+        t1.setBounds(60,50,80,30);
+        c.add(t1);
+        l2=new JLabel("Gender");
+        l2.setBounds(20,100,80,30);
+        c.add(l2);
         ButtonGroup bg=new ButtonGroup();
         r1=new JRadioButton("Male");
         r1.setBounds(110,100,80,30);
@@ -58,13 +68,37 @@ public class Comp extends JFrame implements ActionListener{
         ta.setBounds(100,320,200,200);
         c.add(ta);
         ta.setLineWrap(true);
-        cb.addActionListener(this);
-        
+        //cb.addActionListener(this);
+        JButton b1=new JButton("Submit");
+        b1.setBounds(10, 350, 80, 30);
+        c.add(b1);
+        b1.addActionListener(this);
         setVisible(true);
     }
     public void actionPerformed(ActionEvent e)
     {
       ta.setText("Country-"+cb.getSelectedItem());
+      String Name =t1.getText();
+      String Country=ta.getText();
+      String Gender=r1.getText();
+      String Gender1=r2.getText();
+      //String Course=c1.getText();
+
+
+
+      try(BufferedWriter Writer=new BufferedWriter(new FileWriter("Reg.txt",true)))
+      {
+        Writer.write("Name="+Name);
+        Writer.write("\nCountry="+Country);
+        Writer.write("Gender="+Gender);
+        Writer.write("Gender="+Gender1);
+        //Writer.write("course="+Course);
+      }
+      catch(IOException ex)
+      {
+          System.out.println("Message"+ex.getMessage());
+      }
+          
     }
     public static void main(String[] args) {
         new Comp();
