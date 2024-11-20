@@ -13,12 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ProjTable extends JFrame{
+public class ProjTable1 extends JFrame{
     private Cointainer c;
     private JTable tb;
     private JTextField t1,t2,t3;
     private JButton b1,b2,b3;
-    public ProjTable()
+    public ProjTable1()
     {
      setTitle("JTableExample");
      setSize(600,600);
@@ -74,6 +74,6 @@ public class ProjTable extends JFrame{
      
     }
     public static void main(String[] args) {
-        new ProjTable();
+        new ProjTable1();
     }
 }
